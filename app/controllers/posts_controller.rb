@@ -2,12 +2,11 @@ class PostsController < ApplicationController
   before_filter :authenticate_user!, :only => [:create]
 
   def index
-    #render :locals => { :posts => posts, :show_create_post => user_is_current_user? }
-     respond_to do |format|
-       format.html
+    respond_to do |format|
+       format.html { render :locals => { :posts => posts, :show_create_post => user_is_current_user? } }
        format.xml  { render :xml => posts }
-       format.json { render :json => posts }
-     end
+       format.json { render :locals => { :posts => posts, :show_create_post => user_is_current_user? } }
+    end
   end
 
   def show
